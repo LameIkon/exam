@@ -1,0 +1,16 @@
+﻿{
+  "first_name": "John",
+  "last_name": "Doe",
+  "phones": [
+    {
+      "type": "work",
+      "number": "+45 98 45 67 89"
+    },
+    {
+      "type": "mobile",
+      "number": "+45 87 65 43 21"
+    }
+  ],
+  "email": "jd@sdu.dk",
+  "created_at": "2025-01-01T10:00:00Z"
+}
