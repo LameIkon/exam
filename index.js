@@ -10,7 +10,8 @@ async function startServer() {
     app.use(express.json());
 
     //await dbController.insertContact();
-    await dbController.updateContactWorkPhone();
+    //await dbController.updateContactWorkPhone();
+
 }
 
 startServer();
