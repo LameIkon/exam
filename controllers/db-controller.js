@@ -2,7 +2,6 @@
 const { ObjectId }= require('mongodb');
 
 const contact = require('../json-objects/contact.json');
-const {AggregateOperation} = require("mongodb/src");
 
 async function insertContact(){
     const db = await connectDB();
