@@ -11,7 +11,10 @@ async function startServer() {
 
     //await dbController.insertContact();
     //await dbController.updateContactWorkPhone();
-
+    //await dbController.deleteContactsOlderThanFiveYears();
+    //await dbController.findAllContactsStartingWithJ();
+    //await dbController.deleteCollectionContacts();
+    console.log(await dbController.countCollectionContacts());
 }
 
 startServer();
