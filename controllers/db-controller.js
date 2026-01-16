@@ -25,7 +25,7 @@ async function updateContactWorkPhone()
 
     await db.collection('contacts').updateOne(
         { _id: new ObjectId("6968d924161306503a5cb6d2"), "phones.type": "work"  },
-        {$set: {"phones.$.number": "+45 76 41 37 09" }}
+        { $set: {"phones.$.number": "+45 76 41 37 09" } }
     );
     console.log("Successfully updated contact!");
 }
