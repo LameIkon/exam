@@ -12,16 +12,26 @@ export default function List() {
         loadContacts();
     }, []); 
 
-    const listItems = contacts.map(contact => 
-        <li key={contact._id}>
-            {contact.first_name} {contact.last_name}
-        </li>
-    );
+    const uniqueFirstLettersSet = new Set();
+    for(let i=0; i<contacts.length; i++) {
+        uniqueFirstLettersSet.add(contacts[i].first_name[0]);
+    }
+    const uniqueFirstLetters = [...uniqueFirstLettersSet];
 
     return( 
         <>
-        <h2>List</h2>
-        <ul>{listItems}</ul>
+        {uniqueFirstLetters.map(letter =>
+            <section key={letter}>
+                <h2>{letter}</h2>
+                <ul>
+                    {contacts
+                        .filter(c => c.first_name[0] === letter)
+                        .map(c => 
+                            <li key={c._id}>{c.first_name}</li>
+                        )}
+                </ul>
+            </section>
+        )}
         </>
     );
 }
