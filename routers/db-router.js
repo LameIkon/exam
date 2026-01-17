@@ -82,16 +82,19 @@ router.delete('/api/contacts/:id', async (req, res) => {
     }
 })
 
-router.get('/api/contacts/search/:type.:work', async (req, res) => {
+router.get('/api/contacts/search', async (req, res) => {
     try{
         const db = await connectDB();
+        const reqQuery = req.query.type;
+        //console.log(query);
 
-        console.log(req.params.type);
+        const typeContact = await db.collection('contacts').find({"phones.type": reqQuery}).toArray();
 
-        res.status(200).json("hello world");
+        res.status(200).json(typeContact);
     }
     catch(err){
         console.log(err);
+        res.status(404).json({error: 'Could not find contact'});
     }
 })
 
