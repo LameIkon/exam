@@ -44,7 +44,7 @@ router.put('/api/contacts/:id', async (req, res) => {
 
         const reqBody = req.body;
         //console.log(req.params.id);
-        const id = new ObjectId(req.params.id);
+        const id = new ObjectId(req.params.id); // makes the string id into an ObjectId
 
         await db.collection('contacts').updateOne({_id: id},
             {$set: {last_name: reqBody.last_name,
