@@ -13,6 +13,15 @@ export default function Contact({id}) {
         loadContact();
     }, [id]); 
 
+    async function handleClick() {
+        //alert('You clicked me!');
+        if( confirm("Do you want to delete the contact?") ) {
+            const res = await fetch(`/api/contacts/${id}`, { 
+                method: "DELETE"
+            });
+        }
+    }
+
     if (contact === null) return <p>Loading…</p>;
 
     return(
@@ -22,6 +31,7 @@ export default function Contact({id}) {
             <p>Email: {contact.email}</p>
             <p>Work phone: {contact.phones[0].number}</p>
             <p>Mobile: {contact.phones.find(p => p.type === "mobile").number}</p>
+            <button onClick={handleClick}>Delete Contact</button>
         </>
     );
 }
