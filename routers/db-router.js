@@ -16,6 +16,24 @@ router.get('/api/contacts', async (req, res) => {
     }
 });
 
+ router.get('/api/contacts/:id', async (req, res) => { 
+    try { 
+        const db = await connectDB(); 
+        const id = new ObjectId(req.params.id); 
+        const contact = await db.collection('contacts').findOne({ _id: id }); 
+
+        if (!contact) { 
+            return res.status(404).json({ error: "Contact not found" }); 
+        } 
+        
+        res.status(200).json(contact); 
+    } 
+    catch (err) { 
+        console.error(err); 
+        res.status(500).json({ error: "Server error" }); 
+    } 
+});
+
 router.post('/api/contacts', async (req, res) => {
     try{
         const db = await connectDB();
