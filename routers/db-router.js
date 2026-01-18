@@ -16,7 +16,23 @@ router.get('/api/contacts', async (req, res) => {
     }
 });
 
- router.get('/api/contacts/:id', async (req, res) => { 
+// GET /api/contacts/search?type=work
+// specific must be before id
+router.get('/api/contacts/search', async (req, res) => {
+    try{
+        const db = await connectDB();
+        const type = req.query.type;
+        const contacts = await db.collection('contacts')
+                                 .find({ "phones.type": type })
+                                 .toArray();
+        res.json(contacts);
+    }
+    catch(err){
+        console.log(err);
+    }
+});
+
+router.get('/api/contacts/:id', async (req, res) => { 
     try { 
         const db = await connectDB(); 
         const id = new ObjectId(req.params.id); 
@@ -25,7 +41,7 @@ router.get('/api/contacts', async (req, res) => {
         if (!contact) { 
             return res.status(404).json({ error: "Contact not found" }); 
         } 
-        
+
         res.status(200).json(contact); 
     } 
     catch (err) { 
@@ -99,34 +115,6 @@ router.delete('/api/contacts/:id', async (req, res) => {
             res.status(200).json(contactObj);
         }
 
-    }
-    catch(err){
-        console.log(err);
-    }
-});
-
-// router.get('/api/contacts/search/:type.:work', async (req, res) => {
-//     try{
-//         const db = await connectDB();
-
-//         console.log(req.params.type);
-
-//         res.status(200).json("hello world");
-//     }
-//     catch(err){
-//         console.log(err);
-//     }
-// });
-
-// GET /api/contacts/search?type=work
-router.get('/api/contacts/search', async (req, res) => {
-    try{
-        const db = await connectDB();
-        const type = req.query.type;
-        const contacts = await db.collection('contacts')
-                                 .find({ "phones.type": type })
-                                 .toArray();
-        res.json(contacts);
     }
     catch(err){
         console.log(err);
